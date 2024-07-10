@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+
+    <Table items="{mainService>to_Pa0910}">
+        <columns>
+            <Column>
+                <Label text="{i18n>orderID}"/>
+            </Column>
+            <Column>
+                <Label text="{i18n>freight}"/>
+            </Column>
+            <Column>
+                <Label text="{i18n>shipAddress}"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Navigation" press="onNavToOrders">    
+                <cells>
+                    <ObjectIdentifier title="{mainService>to_Pa0910/PERNR}"/>
+                    <Text text="{mainService>to_Pa0910/PERNR}"/>
+                    <Text text="{mainService>to_Pa0910/PERNR}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+</core:FragmentDefinition>

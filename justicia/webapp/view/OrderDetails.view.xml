@@ -1,0 +1,102 @@
+<mvc:View
+	controllerName="justicia.controller.OrderDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:upload="sap.m.upload" 
+	xmlns:sc="justicia.control">
+
+	<Page>
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button
+						icon="sap-icon://nav-back"
+						press="onBack"
+					/>
+				</contentLeft>
+				<contentMiddle>
+					<Text text="{i18n>orderID} {mainService>PostalCode}"/>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<Panel headerText="{i18n>Dni} {mainService>PostalCode}">
+
+				<l:Grid defaultSpan="L6 M6 S12">
+
+					<f:Form editable="false">
+						<f:layout>
+							<f:ResponsiveGridLayout
+								labelSpanL="6"
+								labelSpanM="6"
+								labelSpanS="12"
+							/>
+						</f:layout>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="{i18n>orderDate}">
+									<f:fields>
+										<Text text="{
+											path: 'mainService>Pernr',
+											type: 'sap.ui.model.odata.type.String'
+										}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>freight}">
+									<f:fields>
+										<Text text="{mainService>Pernr}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>shipName}">
+									<f:fields>
+										<Text text="{mainService>Pernr}"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>shipAddress}">
+									<f:fields>
+										<Text text="{mainService>Pernr}"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:Form>
+
+					<FlexBox class="sapUiTinyMarginTop">
+						<sc:Signature id="signature"></sc:Signature>
+						<Button text="{i18n>clear}"
+								press="onClearSignature"
+								class="sapUiTinyMarginBegin"/>
+					</FlexBox>
+
+				</l:Grid>
+			</Panel>
+
+			<Panel headerText="{i18n>files}">
+			<headerToolbar>
+				<Toolbar>
+					<ToolbarSpacer ></ToolbarSpacer>
+					<Button icon="sap-icon://download"
+							press="onDowloadFile"/>
+				</Toolbar>
+			</headerToolbar>
+				<content>
+					<upload:UploadSet
+										id="uploadSet"
+										maxFileNameLength="55"
+										maxFileSize="10"
+										uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet/"
+										beforeUploadStarts="onFileBeforeUpload"
+										uploadCompleted="onFileUploadComplete"
+										afterItemRemoved="onFileDeleted">
+					</upload:UploadSet>
+				</content>
+			</Panel>
+
+		
+		</content>
+
+	
+	</Page>
+</mvc:View>

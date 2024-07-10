@@ -1,0 +1,38 @@
+_schema-version: "3.2"
+ID: ministerio
+version: 0.0.1
+modules:
+- name: ministerio-approuter
+  type: approuter.nodejs
+  path: ministerio-approuter
+  requires:
+  - name: ministerio_html_repo_runtime
+  - name: uaa_ministerio
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: ministerio_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ministerio_html_repo_host
+    parameters:
+      content-target: true
+resources:
+- name: ministerio_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_ministerio
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: ministerio-xsuaa-service
+    service-plan: application
+- name: ministerio_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
